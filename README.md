@@ -47,6 +47,11 @@ Install the dependencies in a virtual environment
 pip install -r requirements.tx
 ```
 
+In order to reproduce the training and testing experiments, you should download the dataset. Both training and testing scripts do this for you, but you need to:
+
+- Accept the Terms and Conditions for this dataset [here](https://huggingface.co/datasets/wyzelabs/RuleRecommendation) by creating an HF account;
+- Login in your HF account using huggingface-cli following [this guide](https://huggingface.co/docs/huggingface_hub/quick-start).
+
 
 ## Training
 To train a new model, execute the ```train.py``` script. 

@@ -76,8 +76,7 @@ if __name__ == '__main__':
     optimizer = optim.Adam(model.parameters(), lr=config['training']['learning_rate_schedule']["start_value"])
     scheduler = ReduceLROnPlateau(optimizer, mode='min',
                                   factor=config['training']['learning_rate_schedule']['factor'],
-                                  patience=config['training']['learning_rate_schedule']['patience'],
-                                  verbose=True)
+                                  patience=config['training']['learning_rate_schedule']['patience'],)
     best_val_loss = 1e15
     num_epochs = config['training']['num_epochs']
 

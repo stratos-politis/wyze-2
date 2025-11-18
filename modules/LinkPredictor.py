@@ -20,9 +20,13 @@ class LinkPredictor(torch.nn.Module):
         super().__init__()
         self.embedding_edges_trigger = EdgeTypeEmbedding(embedding_edge_trigger_dim, num_edge_types=num_trigger_states)
         self.embedding_edges_action = EdgeTypeEmbedding(embedding_edge_action_dim, num_edge_types=num_actions)
+
+        # GEMINI: FIX: Removed the 'add_self_loops=False' argument, which is deprecated
+        # in modern versions of torch_geometric and caused the crash.
         self.conv1 = SAGEConv(node_dim + embedding_edge_trigger_dim + embedding_edge_action_dim,
-                              2 * hidden_dim, add_self_loops=False)
-        self.conv2 = SAGEConv(2 * hidden_dim, hidden_dim, add_self_loops=False)
+                              2 * hidden_dim)
+        self.conv2 = SAGEConv(2 * hidden_dim, hidden_dim)
+
         self.category_predictor = nn.Sequential(
             nn.Linear(2 * hidden_dim, hidden_linear),  # Concatenate features of both connected nodes
             nn.ReLU(),
